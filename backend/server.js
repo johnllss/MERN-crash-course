@@ -40,12 +40,33 @@ app.post("/api/products", async (req, res) => {
     }
 });
 
+app.put("/api/products/:id", async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: "Invalid product ID." });
+    }
+
+    const product = req.body;
+
+    if (!product.name || !product.price || !product.image) {
+        return res.status(400).json({ success: false, message: "Please provide all fields." });
+    }
+
+    try {
+        await Product.findByIdAndUpdate(id, product, { new: true}); //give updated object back in response
+        res.status(200).json({ success: true, message: "Product updated." });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error." });
+    }
+});
+
 // delete a product
 app.delete("/api/products/:id", async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ success: false, message: "Invalid product ID." });
+        return res.status(404).json({ success: false, message: "Invalid product ID." });
     }
 
     try {
