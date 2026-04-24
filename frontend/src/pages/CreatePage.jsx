@@ -15,7 +15,7 @@ const CreatePage = () => {
   const handleAddProduct = () => {
     const { success, message} = createProduct(newProduct);
 
-    if (!sucess) {
+    if (!success) {
       toast({
         title: "Error",
         description: message,
