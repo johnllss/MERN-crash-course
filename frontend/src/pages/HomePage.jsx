@@ -1,8 +1,16 @@
-import { Container, Text, VStack } from '@chakra-ui/react';
+import ProductCard from '@/components/ProductCard';
+import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
+  const { fetchProducts, products } = useProductStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+  console.log("Products: ", products);
+
   return (
     <Container maxW='container.xl' p={12}>
       <VStack spacing={8}>
@@ -15,6 +23,20 @@ const HomePage = () => {
         >
           Current Products
         </Text>
+
+        <SimpleGrid
+          columns={{
+            base: 1,
+            md: 2,
+            lg: 3
+          }}
+          spacing={10}
+          w={"full"}
+        >
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </SimpleGrid>
 
         <Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
           No products found {" "}
