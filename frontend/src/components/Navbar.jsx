@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Flex, HStack, Text } from '@chakra-ui/react';
-import { useColorMode, useColorModeValue } from './ui/color-mode';
+import { useColorMode, useColorModeValue } from '@/components/ui/color-mode';
 import { Link } from 'react-router-dom';
 
 import { LuSquarePlus } from 'react-icons/lu';

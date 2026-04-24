@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
-import { useColorModeValue } from '/src/components/ui/color-mode';
+import { useColorModeValue } from '@/components/ui/color-mode';
 
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';

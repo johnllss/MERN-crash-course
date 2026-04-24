@@ -1,6 +1,5 @@
-import { Container, Heading, Input, VStack, Box, Button, useToast } from '@chakra-ui/react';
-import { useColorModeValue } from '../components/ui/color-mode';
-import { useProductStore } from '../store/product';
+import { useColorModeValue } from '@/components/ui/color-mode';
+import { useProductStore } from '@/store/product';
 
 const CreatePage = () => {
   const [newProduct, setNewProduct] = useState({
