@@ -1,7 +1,21 @@
 import mongoose from "mongoose";
 import Product from "../models/product.model.js"
 
+const ensureDatabaseConnection = (res) => {
+    if (mongoose.connection.readyState !== 1) {
+        res.status(503).json({
+            success: false,
+            message: "Database is not connected. Check your MongoDB Atlas connection and IP access list.",
+        });
+        return false;
+    }
+
+    return true;
+};
+
 export const getProducts = async (req, res) => {
+    if (!ensureDatabaseConnection(res)) return;
+
     try {
         const products = await Product.find({}); // empty object means find all products
         res.status(200).json({ success: true, data: products });
@@ -12,6 +26,8 @@ export const getProducts = async (req, res) => {
 }
 
 export const createProduct = async (req, res) => {
+    if (!ensureDatabaseConnection(res)) return;
+
     const product = req.body;
 
     if (!product.name || !product.price || !product.image) {
@@ -29,6 +45,8 @@ export const createProduct = async (req, res) => {
 }
 
 export const updateProduct = async (req, res) => {
+    if (!ensureDatabaseConnection(res)) return;
+
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -50,6 +68,8 @@ export const updateProduct = async (req, res) => {
 }
 
 export const deleteProduct = async (req, res) => {
+    if (!ensureDatabaseConnection(res)) return;
+
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
