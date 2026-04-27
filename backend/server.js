@@ -19,11 +19,6 @@ app.get("/api/health", (_req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
+    connectDB();
     console.log(`Server started at http://localhost:${PORT}`);
-});
-
-connectDB().then((conn) => {
-    if (!conn) {
-        console.log("MongoDB connection failed. API server is running, but database-backed routes may return errors until the connection works.");
-    }
 });
