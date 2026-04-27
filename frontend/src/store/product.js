@@ -40,7 +40,7 @@ export const useProductStore = create((set) => ({
                 return;
             }
 
-            set({  products: data.data});
+            set({ products: data.data });
         } catch (error) {
             console.error("fetchProducts request failed:", error);
             set({ products: [] });
