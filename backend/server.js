@@ -12,9 +12,6 @@ app.use(express.json()); // allow us to accept JSON data in request body
 
 // routes
 app.use("/api/products", productRoutes);
-app.get("/api/health", (_req, res) => {
-    res.status(200).json({ success: true, message: "API is running" });
-});
 
 const PORT = process.env.PORT || 5000;
 
